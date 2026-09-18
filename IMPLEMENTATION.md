@@ -4,7 +4,7 @@ When a GitHub Actions run fails, an agent fetches a **truncated** log, classifie
 
 Check boxes as you finish them. Do not start Terraform apply until the preprocessor and replay evals work on disk.
 
-**Status (18 Sep 2026):** Week 0 AWS + GitHub are done — SSO CLI, Haiku ping in `eu-west-1`, $20 budget, public repo [`PaulieWalnuts147/ci-triage-agent`](https://github.com/PaulieWalnuts147/ci-triage-agent). **Next:** Python 3.12 and Terraform CLI, then Week 1 domain code with no AWS.
+**Status (18 Sep 2026):** Week 0 tools are done — SSO CLI, Haiku ping in `eu-west-1`, $20 budget, public repo [`PaulieWalnuts147/ci-triage-agent`](https://github.com/PaulieWalnuts147/ci-triage-agent), Python **3.12.12** via uv, Terraform **v1.16.3**. Fixture-repo name can wait until week 5. **Next:** Week 1 domain code (`src/ci_triage`, preprocessor, pytest) with no AWS. Do not add `infra/` or `terraform apply` yet.
 
 ---
 
@@ -157,8 +157,8 @@ Do this before writing agent code.
 - [x] Create AWS Budget: $10 / $16 / $20, email to you, include Marketplace/Anthropic
 - [x] Create a **public** GitHub repo for this project (Actions minutes stay $0) — [`PaulieWalnuts147/ci-triage-agent`](https://github.com/PaulieWalnuts147/ci-triage-agent)
 - [x] Copy this file to the repo root if it is not already there
-- [ ] Python 3.12 installed (`python3 --version`) — currently 3.14; install 3.12 for Lambda parity
-- [ ] Terraform CLI installed (`terraform version`, 1.9+ is fine)
+- [x] Python 3.12 installed — uv pin `.python-version`; `uv run python --version` is 3.12.12 (Homebrew `python3` may still be 3.14; ignore it in this repo)
+- [x] Terraform CLI installed — `terraform version` is v1.16.3 (no `infra/` skeleton until Week 3)
 - [x] AWS CLI installed and configured for the account (`aws configure sso`, profile `davidnsso`)
 - [ ] Decide fixture-repo name (e.g. `ci-triage-fixtures`) — can wait until week 5
 - [x] Agree: no Lambda-in-VPC experiments (NAT is how POCs become $50)
@@ -270,7 +270,7 @@ Bootstrap state **once**, by hand or via `infra/bootstrap`. This is a few cents/
 ## Week 0 command scratchpad
 
 ```bash
-python3 --version          # 3.12.x
+uv run python --version    # 3.12.x (not Homebrew python3)
 terraform version          # 1.9+
 aws sts get-caller-identity --profile davidnsso
 
