@@ -4,7 +4,7 @@ When a GitHub Actions run fails, an agent fetches a **truncated** log, classifie
 
 Check boxes as you finish them. Do not start Terraform apply until the preprocessor and replay evals work on disk.
 
-**Status (18 Sep 2026):** Week 0 tools are done — SSO CLI, Haiku ping in `eu-west-1`, $20 budget, public repo [`PaulieWalnuts147/ci-triage-agent`](https://github.com/PaulieWalnuts147/ci-triage-agent), Python **3.12.12** via uv, Terraform **v1.16.3**. Fixture-repo name can wait until week 5. **Next:** Week 1 domain code (`src/ci_triage`, preprocessor, pytest) with no AWS. Do not add `infra/` or `terraform apply` yet.
+**Status (19 Sep 2026):** Week 0 done. Week 1: package `ci_triage` + Pydantic `TriageResult` in `src/ci_triage/schema.py`. **Next:** log preprocessor (`preprocess.py`, 150 lines / 24k chars), then pytest on synthetic logs. No AWS, no `infra/`.
 
 ---
 
@@ -72,12 +72,12 @@ There is **no** `post_comment` tool. Lambda posts after validation.
 
 ### Result schema (reject if invalid)
 
-- [ ] `classification`
-- [ ] `confidence` (0–1)
-- [ ] `summary` (≤280 chars)
-- [ ] `evidence[]`: `source` (`log` \| `junit` \| `commit`) + `excerpt` + `pointer`
-- [ ] `recommended_action`: `fix_code` \| `fix_test` \| `retry_later` \| `needs_human`
-- [ ] `cited_log_line` required unless classification is `unknown`
+- [x] `classification`
+- [x] `confidence` (0–1)
+- [x] `summary` (≤280 chars)
+- [x] `evidence[]`: `source` (`log` \| `junit` \| `commit`) + `excerpt` + `pointer`
+- [x] `recommended_action`: `fix_code` \| `fix_test` \| `retry_later` \| `needs_human`
+- [x] `cited_log_line` required unless classification is `unknown`
 
 ---
 
@@ -167,8 +167,8 @@ Do this before writing agent code.
 
 ## Week 1 — Domain (no AWS in tests)
 
-- [ ] `pyproject.toml` + package `ci_triage`
-- [ ] Pydantic result schema and classification enum
+- [x] `pyproject.toml` + package `ci_triage`
+- [x] Pydantic result schema and classification enum (`src/ci_triage/schema.py`)
 - [ ] Log preprocessor with hard character cap
 - [ ] Pytest: synthetic **flake** log
 - [ ] Pytest: synthetic **pytest assertion** failure
