@@ -3,7 +3,9 @@ name = "ci-triage"
 version = "0.1.0"
 description = "Classify GitHub Actions failures from truncated logs."
 requires-python = ">=3.12,<3.13"
-dependencies = []
+dependencies = [
+    "pydantic>=2.13.5",
+]
 [dependency-groups]
 dev = ["pytest>=8.3"]
 [build-system]
