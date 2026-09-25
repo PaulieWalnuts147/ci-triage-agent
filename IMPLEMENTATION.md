@@ -4,7 +4,7 @@ When a GitHub Actions run fails, an agent fetches a **truncated** log, classifie
 
 Check boxes as you finish them. Do not start Terraform apply until the preprocessor and replay evals work on disk.
 
-**Status (19 Sep 2026):** Week 0 done. Week 1: package `ci_triage` + Pydantic `TriageResult` in `src/ci_triage/schema.py`. **Next:** log preprocessor (`preprocess.py`, 150 lines / 24k chars), then pytest on synthetic logs. No AWS, no `infra/`.
+**Status (25 Sep 2026):** Week 0 and Week 1 are done — schema, preprocessor (150 lines / 24k cap), pytest + schema tests (12 passing, no AWS/Bedrock), CI runs `uv run pytest` on push/PR. **Next:** Week 2 local agent loop (Bedrock Converse + tools over fixture files). No `terraform apply`.
 
 ---
 
@@ -18,7 +18,7 @@ Check boxes as you finish them. Do not start Terraform apply until the preproces
 
 - [ ] Ingest `workflow_run` completed + failure via webhook
 - [ ] Verify `X-Hub-Signature-256`
-- [ ] Preprocess logs (failed step, last ~150 lines, error/FAIL grep; never the raw MB log)
+- [x] Preprocess logs (failed step, last ~150 lines, error/FAIL grep; never the raw MB log)
 - [ ] Bedrock **Claude Haiku** agent, max 4 tool rounds, structured JSON result
 - [ ] Classify: `flake` | `product_regression` | `infra` | `test_bug` | `unknown`
 - [ ] Comment on the SHA/PR with excerpt + recommended action
@@ -169,13 +169,13 @@ Do this before writing agent code.
 
 - [x] `pyproject.toml` + package `ci_triage`
 - [x] Pydantic result schema and classification enum (`src/ci_triage/schema.py`)
-- [ ] Log preprocessor with hard character cap
-- [ ] Pytest: synthetic **flake** log
-- [ ] Pytest: synthetic **pytest assertion** failure
-- [ ] Pytest: synthetic **npm 503 / registry** infra failure
-- [ ] Pytest: synthetic **OOM / runner killed** infra failure
-- [ ] Preprocessor tests prove the cap cannot be exceeded
-- [ ] `pytest` is green with **no** AWS and **no** Bedrock calls
+- [x] Log preprocessor with hard character cap (`src/ci_triage/preprocess.py`)
+- [x] Pytest: synthetic **flake** log (`tests/fixtures/flake.log`)
+- [x] Pytest: synthetic **pytest assertion** failure (`tests/fixtures/pytest_assert.log`)
+- [x] Pytest: synthetic **npm 503 / registry** infra failure (`tests/fixtures/npm_503.log`)
+- [x] Pytest: synthetic **OOM / runner killed** infra failure (`tests/fixtures/oom.log`)
+- [x] Preprocessor tests prove the cap cannot be exceeded (`over_char_cap.log`)
+- [x] `pytest` is green with **no** AWS and **no** Bedrock calls (12 tests; also `tests/test_schema.py`)
 
 **Done when:** preprocessor never exceeds the char cap; tests do not call AWS.
 

@@ -1,0 +1,13 @@
+2026-09-18T12:00:00.0000000Z ##[group]Set up job
+2026-09-18T12:00:00.0000000Z Runner image: ubuntu-24.04
+2026-09-18T12:00:00.0000000Z ##[endgroup]
+2026-09-18T12:00:00.0000000Z ##[group]Run lint
+2026-09-18T12:00:00.0000000Z eslint passed
+2026-09-18T12:00:00.0000000Z ##[endgroup]
+2026-09-18T12:00:00.0000000Z ##[group]Run pytest
+2026-09-18T12:00:00.0000000Z collected 40 items
+2026-09-18T12:00:00.0000000Z tests/test_load.py::test_big_matrix ...
+2026-09-18T12:00:00.0000000Z Killed
+2026-09-18T12:00:00.0000000Z ##[error]The runner has received a shutdown signal.
+2026-09-18T12:00:00.0000000Z ##[error]Process completed with exit code 137.
+2026-09-18T12:00:00.0000000Z ##[endgroup]
