@@ -1,0 +1,9 @@
+{
+  "name": "CI",
+  "sha": "abc123def456",
+  "branch": "main",
+  "conclusion": "failure",
+  "jobs": [
+    { "name": "test", "conclusion": "failure" }
+  ]
+}

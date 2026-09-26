@@ -4,7 +4,7 @@ When a GitHub Actions run fails, an agent fetches a **truncated** log, classifie
 
 Check boxes as you finish them. Do not start Terraform apply until the preprocessor and replay evals work on disk.
 
-**Status (25 Sep 2026):** Week 0 and Week 1 are done — schema, preprocessor (150 lines / 24k cap), pytest + schema tests (12 passing, no AWS/Bedrock), CI runs `uv run pytest` on push/PR. **Next:** Week 2 local agent loop (Bedrock Converse + tools over fixture files). No `terraform apply`.
+**Status (26 Sep 2026):** Week 0–1 done. Week 2 tools exist over fixture files (`FixtureStore`, `get_workflow_run`, `get_failed_job_log`, `get_junit_summary`, `get_commit_files`) — no live GitHub. **Next:** pytest for those tools, then Bedrock Converse + `toolConfig` (max 4 rounds) and a local CLI. No `terraform apply`.
 
 ---
 
@@ -184,7 +184,7 @@ Do this before writing agent code.
 ## Week 2 — Local agent loop
 
 - [ ] Bedrock Converse client with `toolConfig`
-- [ ] Tool implementations over **fixture files** (fake GitHub)
+- [x] Tool implementations over **fixture files** (fake GitHub) — `src/ci_triage/tools.py` + `store.py`; runs under `tests/fixtures/runs/<run_id>/`
 - [ ] CLI: `python -m ci_triage path/to/log` (or `scripts/triage_local.py`)
 - [ ] Output always validates against the Pydantic schema
 - [ ] Traces written to local JSON

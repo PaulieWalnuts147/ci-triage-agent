@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="jest" tests="2" failures="1">
+  <testcase classname="src/ok.test.js" name="passes"/>
+  <testcase classname="src/flaky.test.js" name="waits for overlay">
+    <failure message="Error: socket hang up">Timeout</failure>
+  </testcase>
+</testsuite>

@@ -4,7 +4,7 @@ When a GitHub Actions run fails, this agent takes a **truncated** log, classifie
 
 v1 is a single AWS account in `eu-west-1` (Bedrock Claude Haiku, Lambda, no VPC). Hard ceiling **$20/month**.
 
-The agent is **not deployed yet**. Week 1 is domain code only: a Pydantic result contract (`src/ci_triage/schema.py`) and a log preprocessor (`src/ci_triage/preprocess.py`) with pytest. No Bedrock in tests.
+The agent is **not deployed yet**. Domain code so far: result contract (`schema.py`), log preprocessor (`preprocess.py`), and four **fixture-backed tools** (`tools.py`) that read `tests/fixtures/runs/<run_id>/` via `FixtureStore`. No live GitHub or Bedrock in tests. `FixtureStore` is a local adapter; a real GitHub client will replace it later.
 
 See [IMPLEMENTATION.md](IMPLEMENTATION.md) for the plan, cost envelope, and week-by-week checklist.
 
@@ -19,7 +19,7 @@ uv run python --version    # 3.12.x
 
 ## Tests
 
-Synthetic GitHub Actions logs live in `tests/fixtures/` (plain `.log` files). Tests read those files; they do not build log strings in Python.
+Preprocessor fixtures are plain `.log` files under `tests/fixtures/`. Fake workflow runs (what the tools read) live under `tests/fixtures/runs/<run_id>/` (`run.json`, `job.log`, optional `junit.xml`, `commit_files.json`).
 
 ```bash
 uv run pytest -q

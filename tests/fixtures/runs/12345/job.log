@@ -1,0 +1,16 @@
+2026-09-18T12:00:00.0000000Z ##[group]Set up job
+2026-09-18T12:00:00.0000000Z Runner image: ubuntu-24.04
+2026-09-18T12:00:00.0000000Z ##[endgroup]
+2026-09-18T12:00:00.0000000Z ##[group]Run checkout
+2026-09-18T12:00:00.0000000Z Checking out davidn/ci-triage-fixtures
+2026-09-18T12:00:00.0000000Z ##[endgroup]
+2026-09-18T12:00:00.0000000Z ##[group]Run npm test
+2026-09-18T12:00:00.0000000Z > fixtures@1.0.0 test
+2026-09-18T12:00:00.0000000Z > jest
+2026-09-18T12:00:00.0000000Z PASS src/ok.test.js
+2026-09-18T12:00:00.0000000Z FAIL src/flaky.test.js
+2026-09-18T12:00:00.0000000Z   ● waits for overlay
+2026-09-18T12:00:00.0000000Z     thrown: Error: socket hang up
+2026-09-18T12:00:00.0000000Z     Timeout - Async callback was not invoked within the 5000 ms timeout
+2026-09-18T12:00:00.0000000Z ##[error]Process completed with exit code 1.
+2026-09-18T12:00:00.0000000Z ##[endgroup]
